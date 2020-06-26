@@ -30,6 +30,8 @@ const schema = new mongoose.Schema({
   },
 });
 
+// ref - > https://dev.to/sanderdebr/let-s-build-full-stack-visited-places-app-node-js-api-mongodb-and-mapbox-4514
+
 //geocode the address and then save it to database
 schema.pre("save", async function (next) {
   const loc = await geocoder.geocode(this.address);
