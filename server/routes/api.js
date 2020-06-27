@@ -2,51 +2,60 @@ const express = require("express");
 GeoJSON = require("geojson");
 const router = express.Router();
 const Trainer = require("../models/Trainer");
+const geocoder = require("../geocoder");
 
 //get a list of trainers
 
 //Search for trainers that are near that lng and lat
 //URL Params /api/trainers?lng= &lat=
-router.get("/trainers", (req, res) => {
-  Trainer.findOne({
-    geometry: {
-      $geoIntersects: {
-        $geometry: {
-          type: "Point",
-          coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)],
+router.post("/findtrainers", async (req, res) => {
+  try {
+    const geoCoderData = await geocoder.geocode(`${req.body.place}, AU`);
+    console.log(geoCoderData);
+    console.log(req.body);
+
+    if (geoCoderData && geoCoderData.length) {
+      const trainers = await Trainer.find({
+        location: {
+          $near: {
+            // distance in meters from lng and lat values
+            $maxDistance: req.body.distance,
+            $geometry: {
+              type: "Point",
+              // Put the actual lng and lat values
+              coordinates: [
+                geoCoderData[0].longitude,
+                geoCoderData[0].latitude,
+              ],
+            },
+          },
         },
-      },
-    },
-  })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  // console.log(req.query);
-  // Trainer.aggregate([
-  //   {
-  //     $geoNear: {
-  //       near: {
-  //         type: "Point",
-  //         coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)],
-  //       },
-  //       distanceField: "dist.calculated",
-  //       // maxDistance: 1000,
-  //       spherical: true,
-  //     },
-  //   },
-  // ]).then(function (trainers) {
-  //   res.send(trainers);
-  // });
+      });
+      console.log(trainers);
+      res.send(trainers);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("server error");
+  }
 });
 
 //add a new trainer
-router.post("/trainers", (req, res) => {
-  Trainer.create(req.body).then((trainer) => {
-    res.send(trainer);
-  });
+router.post("/trainers", async (req, res) => {
+  console.log(req.body);
+  const geoCoderData = await geocoder.geocode(req.body.address);
+  console.log("geocoderdata", geoCoderData);
+  if (geoCoderData && geoCoderData.length) {
+    req.body.location = {
+      type: "Point",
+      coordinates: [geoCoderData[0].longitude, geoCoderData[0].latitude],
+    };
+    req.body.address = geoCoderData[0].formattedAddress;
+    const data = await Trainer.create(req.body).catch((err) => {
+      console.log(err);
+    });
+    res.send(data);
+  } else res.status(400).send("wrong address entered");
 });
 
 //update a trainer
