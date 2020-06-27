@@ -2,6 +2,7 @@ const express = require("express");
 GeoJSON = require("geojson");
 const router = express.Router();
 const Trainer = require("../models/Trainer");
+const Auth = require("../models/Auth");
 const geocoder = require("../geocoder");
 
 //get a list of trainers
@@ -39,9 +40,19 @@ router.post("/findtrainers", async (req, res) => {
   }
 });
 
-//add a new trainer
+//auth check middleware
+router.use((req, res, next) => {
+  if (req.session.user) {
+    next();
+  } else {
+    res.status(401).send("please login");
+  }
+});
+
+//new profile
 router.post("/trainers", async (req, res) => {
   console.log(req.body);
+  req.body.userId = req.session.user.id;
   const geoCoderData = await geocoder.geocode(req.body.address);
   console.log("geocoderdata", geoCoderData);
   if (geoCoderData && geoCoderData.length) {
@@ -57,21 +68,38 @@ router.post("/trainers", async (req, res) => {
   } else res.status(400).send("wrong address entered");
 });
 
-//update a trainer
+//update a profile
 
-router.patch("/trainers/:id", (req, res) => {
-  Trainer.fineOneAndUpdate({ _id: req.params.id }, req.body, {
-    new: true,
-  }).then((trainer) => {
-    res.json(trainer);
-  });
+router.patch("/trainers/:id", async (req, res) => {
+  console.log(req.body);
+  try {
+    const trainer = await Trainer.findOneAndUpdate(
+      { _id: req.params.id, userId: req.session.user.id },
+      req.body,
+      {
+        new: true,
+      }
+    );
+    res.status(200).send(trainer);
+  } catch (error) {
+    res.status(400).send("bad request");
+    console.log(error);
+  }
 });
 
-//delete a trainer
-router.delete("/trainers/:id", (req, res) => {
-  Trainer.findByIdAndDelete({ _id: req.params.id }).then((trainer) => {
-    res.send(trainer);
-  });
-});
+//delete profile
 
+router.delete("/trainers/:id", async (req, res) => {
+  console.log(req.body);
+  try {
+    const trainer = await Trainer.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.session.user.id,
+    });
+    res.status(200).send("Profile successfully deleted");
+  } catch (error) {
+    res.status(400).send("bad request");
+    console.log(error);
+  }
+});
 module.exports = router;

@@ -34,6 +34,10 @@ const schema = new mongoose.Schema({
     type: pointSchema,
     index: "2dsphere",
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Auth",
+  },
 });
 
 // schema.index({ location: "2dsphere" });
