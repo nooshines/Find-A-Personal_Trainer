@@ -32,14 +32,7 @@ const schema = new mongoose.Schema({
 
   location: {
     type: pointSchema,
-    // coordinates: [],
     index: "2dsphere",
-
-    // coordinates: {
-    //   type: [Number],
-    //   index: "2dsphere",
-    // },
-    // formattedAddress: String,
   },
 });
 

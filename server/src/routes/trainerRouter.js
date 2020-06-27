@@ -5,7 +5,6 @@ const Trainer = require("../models/Trainer");
 const geocoder = require("../geocoder");
 
 //get a list of trainers
-
 //Search for trainers that are near that lng and lat
 //URL Params /api/trainers?lng= &lat=
 router.post("/findtrainers", async (req, res) => {
