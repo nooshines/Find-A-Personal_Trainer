@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 /* expects
     {
         username: String,
-        email:String
+        email:String,
         password: String
     }
 */

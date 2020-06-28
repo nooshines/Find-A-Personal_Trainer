@@ -1,0 +1,47 @@
+body {
+  background: #333;
+  color: #fff;
+}
+a {
+  color: white;
+}
+a:hover {
+  color: #333;
+}
+.navbar {
+  border-bottom: #ff0000 3px solid;
+  opacity: 0.8;
+}
+
+#home-section {
+  background: url(./img/showcase.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+#home-section .dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#home-section .home-inner {
+  padding-top: 250px;
+}
+
+#home-section .card-form {
+  opacity: 0.8;
+}
+
+#home-section .fas,
+#create-section .fas {
+  color: #ff0000;
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
