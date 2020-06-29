@@ -13,19 +13,19 @@ const nav = (ctx, next) => {
             <a href="/home" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="/signup" class="nav-link">Profile</a>
-          </li>
-          <li class="nav-item">
             <a href="/login" class="nav-link">Login</a>
           </li>
           <li class="nav-item">
             <a href="/logout" class="nav-link">Logout</a>
           </li>
           <li class="nav-item">
+            <a href="/profile" class="nav-link">Profile</a>
+          </li>
+          <li class="nav-item">
             <a href="/blogs" class="nav-link">Blogs</a>
           </li>
           <li class="nav-item">
-            <a href="/search" class="nav-link">Search ...</a>
+            <a href="/trainers" class="nav-link">Trainers</a>
           </li>
         </ul>
       </div>

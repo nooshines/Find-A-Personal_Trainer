@@ -1,27 +1,9 @@
 import page from "//unpkg.com/page/page.mjs";
-
-// const submitHandler = async (formData) => {
-//   try {
-//     const response = await fetch("/api/user/login", {
-//       method: "POST",
-//       mode: "cors",
-//       credentials: "same-origin",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(formData),
-//     });
-
-//     const data = await response.json();
-//     console.log(data);
-//     page.redirect("/list");
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+import loginTrainerApi from "../api/auth/loginTrainerApi.js";
 
 const login = (ctx, next) => {
   $("#app").append(`
+  <div class="container mx-auto" id="container-center">
     <form id="form-login">
         <div class="form-group">
             <label for="username">Username</label>
@@ -33,21 +15,24 @@ const login = (ctx, next) => {
             <input type="password" class="form-control" 
                     id="password" name="password" placeholder="password...">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-danger">Submit</button>
     </form>
+    </div>
     `);
 
-  // $("#form-login").submit((e) => {
-  //   e.preventDefault();
+  $("#form-login").submit((e) => {
+    e.preventDefault();
 
-  //   const formData = {
-  //     username: $("#username").val(),
-  //     password: $("#password").val(),
-  //   };
+    const formData = {
+      username: $("#username").val(),
+      password: $("#password").val(),
+    };
 
-  //   console.log(formData);
-  //   submitHandler(formData);
-  // });
+    console.log(formData);
+    loginTrainerApi(formData).then(() => {
+      page.redirect("/profile");
+    });
+  });
 };
 
 export default login;

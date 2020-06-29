@@ -7,11 +7,10 @@ const geocoder = require("../geocoder");
 
 //get a list of trainers
 //Search for trainers that are near that lng and lat
-//URL Params /api/trainers?lng= &lat=
 router.post("/findtrainers", async (req, res) => {
   try {
     const geoCoderData = await geocoder.geocode(`${req.body.place}, AU`);
-    console.log(geoCoderData);
+    console.log("geocoder", geoCoderData);
     console.log(req.body);
 
     if (geoCoderData && geoCoderData.length) {
@@ -38,6 +37,18 @@ router.post("/findtrainers", async (req, res) => {
     console.log(error);
     res.status(500).send("server error");
   }
+});
+
+//get all trainers
+router.get("/", async (req, res) => {
+  const data = await Trainer.find({});
+  res.send(data);
+});
+
+//get trainer by id
+router.get("/trainers/:id", async (req, res) => {
+  const data = await Trainer.findOne({ _id: req.params.id });
+  res.send(data);
 });
 
 //auth check middleware
@@ -68,7 +79,7 @@ router.post("/trainers", async (req, res) => {
   } else res.status(400).send("wrong address entered");
 });
 
-//update a profile
+//update  profile
 
 router.patch("/trainers/:id", async (req, res) => {
   console.log(req.body);

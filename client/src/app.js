@@ -6,6 +6,10 @@ page.configure({ window: window }); // bind to main window
 import nav from "./components/nav.js";
 import login from "./components/login.js";
 import home from "./components/home.js";
+import profile from "./components/profile.js";
+import logout from "./components/logout.js";
+import trainers from "./components/trainers.js";
+import blogs from "./components/blogs.js";
 
 const showPages = () => {
   //configure routes
@@ -14,15 +18,15 @@ const showPages = () => {
     page.redirect("/home");
   });
 
-  // page("/home", nav, () => {
-  //   $("#app").append("<h1>Home Route Reached</h1>");
-  // });
-
-  page("/login", nav, login);
-
   page("/home", nav, home);
+  page("/login", nav, login);
+  page("/profile", nav, profile);
+  page("/logout", nav, logout);
+  page("/trainers", nav, trainers);
+  page("/blogs", nav, blogs);
 
-  // page("/editlist/:id", nav, editList);
+  // page("/editprofile/:id", nav, editprofile);
+  // page("/deleteprofile/:id", nav, deleteprofile);
 
   page({ hashbang: true });
 };

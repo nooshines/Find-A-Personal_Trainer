@@ -38,7 +38,7 @@ router.use((req, res, next) => {
 
 //New Route
 router.post("/new", async (req, res) => {
-  req.body.owner = req.session.user.id; //ensure logged in user owns this list
+  req.body.userId = req.session.user.id; //ensure logged in user owns this list
   try {
     const data = await Blog.create(req.body);
     res.json(data);

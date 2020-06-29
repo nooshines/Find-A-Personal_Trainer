@@ -2,11 +2,18 @@ body {
   background: #333;
   color: #fff;
 }
+#container-center {
+  margin-top: 200px;
+}
+#blog-center {
+  margin-top: 100px;
+}
+
 a {
   color: white;
 }
 a:hover {
-  color: #333;
+  color: white;
 }
 .navbar {
   border-bottom: #ff0000 3px solid;
@@ -18,7 +25,7 @@ a:hover {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  min-height: 100vh;
+  min-height: 800px;
 }
 
 #home-section .dark-overlay {
@@ -26,7 +33,7 @@ a:hover {
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100vh;
+  min-height: 800px;
   background: rgba(0, 0, 0, 0.7);
 }
 
