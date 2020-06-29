@@ -1,6 +1,6 @@
 const deleteProfileApi = async (id) => {
   try {
-    const response = await fetch(`/api/api/delete/${id}`, {
+    const response = await fetch(`/api/api/trainers/${id}`, {
       method: "DELETE",
       mode: "cors",
       credentials: "same-origin",

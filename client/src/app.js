@@ -20,7 +20,7 @@ const showPages = () => {
 
   page("/home", nav, home);
   page("/login", nav, login);
-  page("/profile", nav, profile);
+  page("/profile/:id", nav, profile);
   page("/logout", nav, logout);
   page("/trainers", nav, trainers);
   page("/blogs", nav, blogs);

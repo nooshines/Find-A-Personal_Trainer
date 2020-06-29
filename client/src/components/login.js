@@ -27,10 +27,9 @@ const login = (ctx, next) => {
       username: $("#username").val(),
       password: $("#password").val(),
     };
-
-    console.log(formData);
-    loginTrainerApi(formData).then(() => {
-      page.redirect("/profile");
+    loginTrainerApi(formData).then((data) => {
+      console.log("data", data);
+      page.redirect(`/profile/${data.id}`);
     });
   });
 };

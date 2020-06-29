@@ -28,6 +28,7 @@ const schema = new mongoose.Schema({
   available: {
     type: Boolean,
     default: false,
+    required: false,
   },
 
   location: {

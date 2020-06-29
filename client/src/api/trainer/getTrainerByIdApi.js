@@ -4,6 +4,10 @@ const getTrainersByIdApi = async (id) => {
       method: "GET",
       mode: "cors",
       credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(id),
     });
     const result = await response.json();
     return result;

@@ -52,3 +52,7 @@ a:hover {
   padding: 5px;
   border-radius: 5px;
 }
+
+#signedup-msg {
+  display: none;
+}

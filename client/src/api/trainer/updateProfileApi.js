@@ -1,6 +1,6 @@
-const updateProfileApi = async (data) => {
+const updateProfileApi = async (data, id) => {
   try {
-    const response = await fetch(`/api/api/update/${id}`, {
+    const response = await fetch(`/api/api/trainers/${id}`, {
       method: "PATCH",
       mode: "cors",
       credentials: "same-origin",

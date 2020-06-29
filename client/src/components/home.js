@@ -45,6 +45,7 @@ const home = (ctx, next) => {
           <div class="card bg-danger text-center card-form">
             <div class="card-body">
               <h3>Sign Up Today</h3>
+              <h4 id="signedup-msg"></h4>
               <p>Please fill out this form to register</p>
               <form id="form-signup">
                 <div class="form-group">
@@ -100,8 +101,7 @@ const home = (ctx, next) => {
 
     console.log(formData);
     createTrainerApi(formData).then((data) => {
-      page.redirect("/profile");
-      console.log(data);
+      $("#signedup-msg").show().text("Successfully signed up");
     });
   });
 };
