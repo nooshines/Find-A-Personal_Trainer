@@ -5,9 +5,9 @@ import deleteProfileApi from "../api/trainer/deleteProfileApi.js";
 
 const profile = async (ctx, next) => {
   const id = ctx.params.id;
-  const getProfile = await getTrainerProfileApi();
-  console.log(getProfile);
-  if (getProfile) {
+  const profileInfo = await getTrainerProfileApi();
+  console.log("trainer profile:", profileInfo);
+  if (profileInfo) {
     $("#app").append(`
     <div class="container mx-auto mt-5" id="view-profile">
     <div class="row">
@@ -16,22 +16,22 @@ const profile = async (ctx, next) => {
     </div>
    
     <label>Name</label>
-    <div>${getProfile.name}</div>
+    <div>${profileInfo.name}</div>
     <label>certificate</label>
-    <div>${getProfile.certificate}</div>
+    <div>${profileInfo.certificate}</div>
     <label>address</label>
-    <div>${getProfile.address}</div>
+    <div>${profileInfo.address}</div>
     <label>available</label>
-    <div>${getProfile.available ? "yes" : "No"}</div>
+    <div>${profileInfo.available ? "yes" : "No"}</div>
     </div>
     
 
     `);
     $("#edit-profile").on("click", () => {
-      profileForm(getProfile, "edit");
+      profileForm(profileInfo, "edit");
     });
     $("#delete-profile").on("click", () => {
-      deleteProfileApi(getProfile._id).then(() => {
+      deleteProfileApi(profileInfo._id).then(() => {
         page.redirect(`/profile/${id}`);
       });
     });

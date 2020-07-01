@@ -1,4 +1,6 @@
 const nav = (ctx, next) => {
+  console.log("ctx", ctx);
+
   $("#app").empty();
   $("#app")
     .append(` <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
@@ -8,7 +10,7 @@ const nav = (ctx, next) => {
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto" id="navbar-list">
           <li class="nav-item">
             <a href="/home" class="nav-link">Home</a>
           </li>
@@ -18,9 +20,7 @@ const nav = (ctx, next) => {
           <li class="nav-item">
             <a href="/logout" class="nav-link">Logout</a>
           </li>
-          <li class="nav-item">
-            <a href="/profile" class="nav-link">Profile</a>
-          </li>
+         
           <li class="nav-item">
             <a href="/blogs" class="nav-link">Blogs</a>
           </li>
@@ -31,6 +31,12 @@ const nav = (ctx, next) => {
       </div>
     </div>
   </nav> `);
+
+  if (document.cookie.indexOf("connect.sid") > -1) {
+    $("#nav-list").append(` <li class="nav-item " id="hide"  >
+    <a href="/profile" class="nav-link">Profile</a>
+  </li>`);
+  }
 
   next(); // move onto next middleware
 };

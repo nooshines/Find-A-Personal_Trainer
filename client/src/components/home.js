@@ -77,9 +77,24 @@ const home = (ctx, next) => {
     <div class="col text-center py-5">
       <h4 class="display-5">Are you looking for a personal trainer?</h4>
       <p class="lead">if you are looking for a personal trainer near you, just type in a location and find personal trainers around your location </p>
-      <div class="form-group">
-      <input type="password" class="form-control form-control-lg" placeholder="enter a location">
+
+
+    <div class="input-group mb-3">
+  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+  <div class="input-group-append">
+    <button class="btn btn-outline-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">City</button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Sydney</a>
+      <a class="dropdown-item" href="#">Melbourne</a>
+      <a class="dropdown-item" href="#">Perth</a>
+   
     </div>
+  </div>
+</div>
+
+
+
+
     <div class="form-group">
     <input type="password" class="form-control form-control-lg" placeholder="distance">
   </div>
@@ -98,10 +113,13 @@ const home = (ctx, next) => {
       email: $("#email").val(),
       password: $("#password").val(),
     };
-
     console.log(formData);
+    //new trainer
     createTrainerApi(formData).then((data) => {
-      $("#signedup-msg").show().text("Successfully signed up");
+      setTimeout(() => {
+        $("#signedup-msg").show().text("Successfully signed up");
+      }, 3000);
+      page.redirect("/login");
     });
   });
 };

@@ -5,15 +5,6 @@ const Trainer = require("../models/Trainer");
 const Auth = require("../models/Auth");
 const geocoder = require("../geocoder");
 
-//auth check middleware
-router.use((req, res, next) => {
-  console.log("req.session", req.session);
-  if (req.session.user) {
-    next();
-  } else {
-    res.status(401).send("please login");
-  }
-});
 //get a list of trainers
 //Search for trainers that are near that lng and lat
 router.post("/findtrainers", async (req, res) => {
@@ -58,6 +49,16 @@ router.get("/", async (req, res) => {
 router.get("/trainers/:id", async (req, res) => {
   const data = await Trainer.findOne({ _id: req.params.id });
   res.send(data);
+});
+
+//auth check middleware
+router.use((req, res, next) => {
+  console.log("req.session", req.session);
+  if (req.session.user) {
+    next();
+  } else {
+    res.status(401).send("please login");
+  }
 });
 
 //get trainer profile

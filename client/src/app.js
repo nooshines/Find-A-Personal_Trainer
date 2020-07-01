@@ -25,8 +25,8 @@ const showPages = () => {
   page("/trainers", nav, trainers);
   page("/blogs", nav, blogs);
 
-  // page("/editprofile/:id", nav, editprofile);
-  // page("/deleteprofile/:id", nav, deleteprofile);
+  // page("/profile/edit/:id", nav, editprofile);
+  // page("/profile/new/:id", nav, newprofile);
 
   page({ hashbang: true });
 };

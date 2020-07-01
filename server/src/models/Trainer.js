@@ -41,9 +41,7 @@ const schema = new mongoose.Schema({
   },
 });
 
-// schema.index({ location: "2dsphere" });
-
-//geocode the address and then save it to database
+// //geocode the address and then save it to database
 // schema.pre("save", async function (next) {
 //   const loc = await geocoder.geocode(this.address);
 //   console.log(loc);
