@@ -3,6 +3,7 @@ import blogForm from "./blogForm.js";
 import getBlogByIdApi from "../api/blog/getAllBlogsApi.js";
 import updateBlogApi from "../api/blog/updateBlogApi.js";
 import deleteBlogApi from "../api/blog/deleteBlogApi.js";
+import createBlogApi from "../api/blog/createBlogApi.js";
 
 const blog = async (ctx, next) => {
   const id = ctx.params.id;
@@ -27,6 +28,7 @@ const blog = async (ctx, next) => {
 
     `);
     $("#edit-blog").on("click", () => {
+      createBlogApi();
       blogForm(blogInfo, "edit");
     });
     $("#delete-blog").on("click", () => {

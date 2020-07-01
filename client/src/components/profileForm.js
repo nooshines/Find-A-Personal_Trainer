@@ -1,8 +1,12 @@
 import page from "//unpkg.com/page/page.mjs";
 import createProfileApi from "../api/trainer/createProfileApi.js";
 import updateProfileApi from "../api/trainer/updateProfileApi.js";
+import getTrainerProfileApi from "../api/trainer/getTrainerProfileApi.js";
 
-const profileForm = (formValues = {}, type) => {
+const profileForm = async (ctx, next) => {
+  const id = ctx.params.id;
+  const profile = await getTrainerProfileApi(id);
+  console.log(profile);
   $("#view-profile").remove();
   $("#app").append(` 
   <header class="container mt-5 pt-3">
@@ -11,24 +15,24 @@ const profileForm = (formValues = {}, type) => {
           <div class="form-group">
              <label>Name</label>
            <input type="text" name="name" value="${
-             formValues.name ? formValues.name : ""
+             profile.name ? profile.name : ""
            }"></input>
         </div>
         <div class="form-group">
            <label>certificate</label>
            <input type="text" name="certificate" value="${
-             formValues.certificate ? formValues.certificate : ""
+             profile.certificate ? profile.certificate : ""
            }"></input>
         </div>
         <div class="form-group">
            <label>address</label>
         <input type="text" name="address" value="${
-          formValues.address ? formValues.address : ""
+          profile.address ? profile.address : ""
         }"></input>
         <div class="form-group">
         <label>Bio</label>
      <input type="text" name="bio" value="${
-       formValues.bio ? formValues.bio : ""
+       profile.bio ? profile.bio : ""
      }"></input>
   </div>
      </div>
@@ -45,17 +49,16 @@ const profileForm = (formValues = {}, type) => {
       address: $("input[name='address']").val(),
       bio: $("input[name='bio']").val(),
     };
-    if (type === "new") {
-      createProfileApi(formData).then((data) => {
-        console.log("data", data);
-        page.redirect(`/profile/${data.userId}`);
-      });
-    } else {
-      updateProfileApi(formData, formValues._id).then((data) => {
-        console.log("data", data);
-        page.redirect(`/profile/${data.userId}`);
-      });
-    }
+    // if (type === "new") {
+    //   createProfileApi(formData).then((data) => {
+    //     console.log("data", data);
+    //     page.redirect(`/profile/${data.userId}`);
+    //   });
+    // }
+    updateProfileApi(formData, profile._id).then((data) => {
+      console.log("data", data);
+      page.redirect(`/profile/${data.userId}`);
+    });
   });
 };
 

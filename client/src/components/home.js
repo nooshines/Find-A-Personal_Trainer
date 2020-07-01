@@ -81,19 +81,20 @@ const home = (ctx, next) => {
 <form id="search-form">
     <div class="input-group mb-3">
   <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="enter a location" id="location">
-  <div class="input-group-append">
-    <button class="btn btn-outline-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">City</button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#" id="sydney">Sydney</a>
-      <a class="dropdown-item" href="#" id="melbourne">Melbourne</a>
-      <a class="dropdown-item" href="#" id="perth">Perth</a>
-    </div>
-  </div>
+  <div class="form-group">
+
+  <select class="form-control" id="form-select">
+    <option>Sydney</option>
+    <option>Melbourne</option>
+    <option>Perth</option>
+  </select>
+</div>
 </div>
     <div class="form-group">
     <input type="text" class="form-control " placeholder="distance" id="distance">
   </div>
-      <a href="#" class="btn btn-outline-secondary" id="search">Serach</a>
+      <button class="btn btn-outline-secondary" id="search">Search</button>
+   
     </div>
     </form>
   </div>
@@ -124,7 +125,7 @@ const home = (ctx, next) => {
     const searchData = {
       location: $("#location").val(),
       distance: $("#distance").val(),
-      // const city : $("#");
+      city: $("#form-select").val(),
     };
     console.log(searchData);
   });

@@ -11,6 +11,7 @@ import logout from "./components/logout.js";
 import trainers from "./components/trainers.js";
 import blogs from "./components/blogs.js";
 import blog from "./components/blog.js";
+import profileForm from "./components/profileForm.js";
 
 const showPages = () => {
   //configure routes
@@ -28,7 +29,7 @@ const showPages = () => {
   page("/blog/:id", nav, blog);
   // page("/blog/edit/:id", nav, editblog);
   // page("/blog/new/:id", nav, newblog);
-  // page("/profile/edit/:id", nav, editprofile);
+  page("/profile/edit/:id", nav, profileForm);
   // page("/profile/new/:id", nav, newprofile);
 
   page({ hashbang: true });

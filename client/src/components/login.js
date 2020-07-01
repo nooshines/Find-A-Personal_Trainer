@@ -22,7 +22,6 @@ const login = (ctx, next) => {
 
   $("#form-login").submit((e) => {
     e.preventDefault();
-
     const formData = {
       username: $("#username").val(),
       password: $("#password").val(),
@@ -30,6 +29,7 @@ const login = (ctx, next) => {
     //login
     loginTrainerApi(formData).then((data) => {
       console.log("data", data);
+      localStorage.setItem("user", JSON.stringify(data));
       page.redirect(`/profile/${data.id}`);
     });
   });

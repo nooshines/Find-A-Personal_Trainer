@@ -1,6 +1,6 @@
-const nav = (ctx, next) => {
-  console.log("ctx", ctx);
+import page from "//unpkg.com/page/page.mjs";
 
+const nav = (ctx, next) => {
   $("#app").empty();
   $("#app")
     .append(` <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
@@ -32,10 +32,15 @@ const nav = (ctx, next) => {
     </div>
   </nav> `);
 
-  if (document.cookie.indexOf("connect.sid") > -1) {
-    $("#nav-list").append(` <li class="nav-item " id="hide"  >
-    <a href="/profile" class="nav-link">Profile</a>
+  console.log("localstorage:", localStorage.getItem("user"));
+  if (localStorage.getItem("user")) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    $("#navbar-list").append(` <li class="nav-item">
+    <a class="nav-link" id="profile">Profile</a>
   </li>`);
+    $("#profile").on("click", () => {
+      page.redirect(`/profile/${user.id}`);
+    });
   }
 
   next(); // move onto next middleware

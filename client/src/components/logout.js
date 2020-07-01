@@ -6,10 +6,11 @@ const logout = (ctx, next) => {
     `<button class="btn btn-outline-secondary ml-5 logout-btn" id="container-center">Logout</button>`
   ).on("click", () => {
     logoutTrainerApi().then(() => {
+      localStorage.removeItem("user");
       $("logout-btn").hide();
-      // setTimeout(() => {
-      //   $("#app").append.text("Successfully signed out");
-      // }, 3000);
+      setTimeout(() => {
+        $("#app").append(`<h2>Successfully logged out</h2>`);
+      }, 4000);
       page.redirect("/home");
     });
   });

@@ -6,6 +6,7 @@ import getBlogByIdApi from "../api/blog/getBlogByIdApi.js";
 import blogForm from "../components/blogForm.js";
 import deleteBlogApi from "../api/blog/deleteBlogApi.js";
 import createBlogApi from "../api/blog/createBlogApi.js";
+import profileNew from "./profileNew.js";
 
 const profile = async (ctx, next) => {
   const id = ctx.params.id;
@@ -14,15 +15,13 @@ const profile = async (ctx, next) => {
   if (profileInfo) {
     $("#app").append(`
   <h3 class="mt-5 pt-5">profile</h3>
-  
-   
     <label>Name</label>
     <div>${profileInfo.name}</div>
     <label>certificate</label>
     <div>${profileInfo.certificate}</div>
     <label>address</label>
     <div>${profileInfo.address}</div>
-    <label>available</label>
+    <label>Bio</label>
     <div>${profileInfo.bio}</div>
     </div>
 
@@ -34,10 +33,12 @@ const profile = async (ctx, next) => {
     </div>
     `);
 
-    $("#create-blog").on("click", () => {});
+    $("#create-blog").on("click", () => {
+      page.redirect("/blogForm");
+    });
 
     $("#edit-profile").on("click", () => {
-      profileForm(profileInfo, "edit");
+      page.redirect(`/profile/edit/${id}`);
     });
     $("#delete-profile").on("click", () => {
       deleteProfileApi(profileInfo._id).then(() => {
@@ -45,21 +46,20 @@ const profile = async (ctx, next) => {
       });
     });
   } else {
-    profileForm({}, "new");
+    profileNew();
   }
-
   const blogInfo = await getBlogByIdApi(profileInfo.userId);
   console.log(blogInfo);
   if (blogInfo) {
     $("#app").append(`<h3 class="mt-5">blogs</h3>`);
     blogInfo.forEach((blog) => {
-      $("#app").append(` 
-      <div>${blog.title}</div>
-      <div>${blog.body}</div>
-      <div>${blog.createdAt}</div>
-      <button id="edit-blog" class="btn btn-success">edit</button>
-      <button id="delete-blog" class="btn btn-danger">delete</button>
-      `);
+      $("#app").append(`
+        <div>${blog.title}</div>
+        <div>${blog.body}</div>
+        <div>${blog.createdAt}</div>
+        <button id="edit-blog" class="btn btn-success">edit</button>
+        <button id="delete-blog" class="btn btn-danger">delete</button>
+        `);
     });
     $("#edit-blog").on("click", () => {
       blogForm(blogInfo, "edit");

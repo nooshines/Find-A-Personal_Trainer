@@ -1,7 +1,14 @@
-import page from "//unpkg.com/page/page.mjs";
 import getAllTrainersApi from "../api/trainer/getAllTrainersApi.js";
 
 const addTrainersToDom = (trainers) => {
+  $("#app").append(` 
+  <h1 class="text-light mt-5 pt-5 text-center">
+    Meet The Trainers
+  </h1>
+  <p class="lead text-center">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias laborum numquam aperiam dolores a porro!
+  </p>
+`);
   trainers.forEach((trainer) => {
     console.log("trainer", trainer);
     $("#app").append(`
@@ -40,20 +47,15 @@ const addTrainersToDom = (trainers) => {
 };
 
 const trainers = (ctx, next) => {
-  // $("#app").empty();
-  $("#app").append(` 
-
-            <h1 class="text-light mt-5 pt-5 text-center">
-              Meet The Trainers
-            </h1>
-            <p class="lead text-center">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias laborum numquam aperiam dolores a porro!
-            </p>
-  
-  `);
   getAllTrainersApi().then((data) => {
     console.log(data);
-    addTrainersToDom(data);
+    if (data && data.length) {
+      addTrainersToDom(data);
+    } else {
+      $("#app").append(` 
+      <h3 class="container mt-5 pt-5">There are No Trainers</h3>
+      `);
+    }
   });
 };
 
