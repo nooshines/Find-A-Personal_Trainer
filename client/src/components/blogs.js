@@ -2,6 +2,8 @@ import page from "//unpkg.com/page/page.mjs";
 import getAllBlogsApi from "../api/blog/getAllBlogsApi.js";
 
 const addBlogsToDom = (blogs) => {
+  console.log("blogs", blogs);
+
   blogs.forEach((blog) => {
     $("#app").append(` 
     <section id="blog" class="py-3">

@@ -10,12 +10,6 @@ router.get("/", async (req, res) => {
   res.send(data);
 });
 
-//Get By Id
-router.get("/:id", async (req, res) => {
-  const data = await Blog.findOne({ _id: req.params.id });
-  res.send(data);
-});
-
 //authed routes
 
 //auth middleware check
@@ -27,6 +21,12 @@ router.use((req, res, next) => {
   } else {
     res.status(401).send("please login");
   }
+});
+
+//Get By Id
+router.get("/:id", async (req, res) => {
+  const data = await Blog.find({ userId: req.params.id });
+  res.send(data);
 });
 
 /*

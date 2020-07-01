@@ -25,6 +25,12 @@ const profileForm = (formValues = {}, type) => {
         <input type="text" name="address" value="${
           formValues.address ? formValues.address : ""
         }"></input>
+        <div class="form-group">
+        <label>Bio</label>
+     <input type="text" name="bio" value="${
+       formValues.bio ? formValues.bio : ""
+     }"></input>
+  </div>
      </div>
      <button class="btn btn-danger">Submit</button>
         </form>
@@ -37,6 +43,7 @@ const profileForm = (formValues = {}, type) => {
       name: $("input[name='name']").val(),
       certificate: $("input[name='certificate']").val(),
       address: $("input[name='address']").val(),
+      bio: $("input[name='bio']").val(),
     };
     if (type === "new") {
       createProfileApi(formData).then((data) => {

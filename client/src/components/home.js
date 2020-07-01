@@ -78,28 +78,24 @@ const home = (ctx, next) => {
       <h4 class="display-5">Are you looking for a personal trainer?</h4>
       <p class="lead">if you are looking for a personal trainer near you, just type in a location and find personal trainers around your location </p>
 
-
+<form id="search-form">
     <div class="input-group mb-3">
-  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+  <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="enter a location" id="location">
   <div class="input-group-append">
     <button class="btn btn-outline-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">City</button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Sydney</a>
-      <a class="dropdown-item" href="#">Melbourne</a>
-      <a class="dropdown-item" href="#">Perth</a>
-   
+      <a class="dropdown-item" href="#" id="sydney">Sydney</a>
+      <a class="dropdown-item" href="#" id="melbourne">Melbourne</a>
+      <a class="dropdown-item" href="#" id="perth">Perth</a>
     </div>
   </div>
 </div>
-
-
-
-
     <div class="form-group">
-    <input type="password" class="form-control form-control-lg" placeholder="distance">
+    <input type="text" class="form-control " placeholder="distance" id="distance">
   </div>
-      <a href="#" class="btn btn-outline-secondary">Serach</a>
+      <a href="#" class="btn btn-outline-secondary" id="search">Serach</a>
     </div>
+    </form>
   </div>
 </div>
 </section>
@@ -121,6 +117,16 @@ const home = (ctx, next) => {
       }, 3000);
       page.redirect("/login");
     });
+  });
+
+  $("#search-form").submit((event) => {
+    event.preventDefault();
+    const searchData = {
+      location: $("#location").val(),
+      distance: $("#distance").val(),
+      // const city : $("#");
+    };
+    console.log(searchData);
   });
 };
 

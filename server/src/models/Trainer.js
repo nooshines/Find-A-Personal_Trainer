@@ -25,9 +25,8 @@ const schema = new mongoose.Schema({
     type: String,
     required: [true, "Please add an adress"],
   },
-  available: {
-    type: Boolean,
-    default: false,
+  bio: {
+    type: String,
     required: false,
   },
 

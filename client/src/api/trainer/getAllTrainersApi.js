@@ -1,6 +1,6 @@
 const getAllTrainerssApi = async () => {
   try {
-    const response = await fetch("/api", {
+    const response = await fetch("/api/api", {
       method: "GET",
       mode: "cors",
       credentials: "same-origin",
