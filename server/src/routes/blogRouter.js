@@ -23,9 +23,21 @@ router.use((req, res, next) => {
   }
 });
 
-//Get By Id
-router.get("/:id", async (req, res) => {
-  const data = await Blog.find({ userId: req.params.id });
+//get all blogs by userId
+router.get("/trainerblog", async (req, res) => {
+  const data = await Blog.find({
+    userId: req.session.user.id,
+  });
+  res.send(data);
+});
+
+//get blog by user blogId
+router.get("/trainerblog/:blogId", async (req, res) => {
+  const data = await Blog.findOne({
+    _id: req.params.blogId,
+    userId: req.session.user.id,
+  });
+  console.log(data);
   res.send(data);
 });
 

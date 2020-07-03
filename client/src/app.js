@@ -12,6 +12,10 @@ import trainers from "./components/trainers.js";
 import blogs from "./components/blogs.js";
 import blog from "./components/blog.js";
 import profileForm from "./components/profileForm.js";
+import blogForm from "./components/blogForm.js";
+import profileNew from "./components/profileNew.js";
+import blogNew from "./components/blogNew.js";
+import searchResult from "./components/searchResult.js";
 
 const showPages = () => {
   //configure routes
@@ -26,11 +30,12 @@ const showPages = () => {
   page("/logout", nav, logout);
   page("/trainers", nav, trainers);
   page("/blogs", nav, blogs);
-  page("/blog/:id", nav, blog);
-  // page("/blog/edit/:id", nav, editblog);
-  // page("/blog/new/:id", nav, newblog);
+  page("/blog", nav, blog);
+  page("/blog/new", nav, blogNew);
+  page("/blog/edit/:id", nav, blogForm);
   page("/profile/edit/:id", nav, profileForm);
-  // page("/profile/new/:id", nav, newprofile);
+  page("/profile/new/:id", nav, profileNew);
+  page("/search/result", nav, searchResult);
 
   page({ hashbang: true });
 };

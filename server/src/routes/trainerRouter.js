@@ -9,7 +9,7 @@ const geocoder = require("../geocoder");
 //Search for trainers that are near that lng and lat
 router.post("/findtrainers", async (req, res) => {
   try {
-    const geoCoderData = await geocoder.geocode(`${req.body.place}, AU`);
+    const geoCoderData = await geocoder.geocode(`${req.body.location} AU`);
     console.log("geocoder", geoCoderData);
     console.log(req.body);
 
@@ -18,7 +18,7 @@ router.post("/findtrainers", async (req, res) => {
         location: {
           $near: {
             // distance in meters from lng and lat values
-            $maxDistance: req.body.distance,
+            $maxDistance: req.body.distance ? req.body.distance : 50000,
             $geometry: {
               type: "Point",
               // Put the actual lng and lat values

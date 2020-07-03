@@ -4,12 +4,12 @@ const addBlogsToDom = (blogs) => {
   console.log("blogs", blogs);
   $("#app").append(` 
   <div class="container text-center" id="blog-center"> 
-        <h1>Read Our Blog</h1>
+        <h1>Read Our Blogs</h1>
   </div>
 `);
   blogs.forEach((blog) => {
     $("#app").append(` 
-    <section id="blog" class="py-3">
+
     <div class="container">
       <div class="row">
         <div class="col">
@@ -26,7 +26,7 @@ const addBlogsToDom = (blogs) => {
         </div>
       </div>
     </div>
-  </section>
+
     `);
   });
 };

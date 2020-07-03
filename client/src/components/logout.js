@@ -8,9 +8,9 @@ const logout = (ctx, next) => {
     logoutTrainerApi().then(() => {
       localStorage.removeItem("user");
       $("logout-btn").hide();
-      setTimeout(() => {
-        $("#app").append(`<h2>Successfully logged out</h2>`);
-      }, 4000);
+      // setTimeout(() => {
+      //   $("#app").append(`<h2>Successfully logged out</h2>`);
+      // }, 4000);
       page.redirect("/home");
     });
   });

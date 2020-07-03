@@ -1,6 +1,7 @@
-const getBlogByIdApi = async (id) => {
+const getBlogByUserIdBlogId = async (id) => {
+  console.log("getBlogByIdApi");
   try {
-    const response = await fetch(`/api/blog/${id}`, {
+    const response = await fetch(`/api/blog/trainerblog/${id}`, {
       method: "GET",
       mode: "cors",
       credentials: "same-origin",
@@ -12,4 +13,4 @@ const getBlogByIdApi = async (id) => {
   }
 };
 
-export default getBlogByIdApi;
+export default getBlogByUserIdBlogId;

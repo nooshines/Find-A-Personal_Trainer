@@ -1,22 +1,18 @@
 import page from "//unpkg.com/page/page.mjs";
+import createBlogApi from "../api/blog/createBlogApi.js";
 import updateBlogApi from "../api/blog/updateBlogApi.js";
-import getBlogByUserIdBlogId from "../api/blog/getBlogByUserIdBlogId.js";
 
-const blogForm = async (ctx, next) => {
-  const id = ctx.params.id;
-  const blogInfo = await getBlogByUserIdBlogId(id);
-  console.log(blogInfo);
+const blogNew = () => {
   $("#app").append(` 
   <header class="container mt-5 pt-3">
-        <h1>Welcome </h1>
         <form id="blog-form">
           <div class="form-group">
              <label>title</label>
-           <input id="title" type="text" name="name" value="${blogInfo.title}"></input>
+           <input id="title"type="text" name="name"></input>
         </div>
         <div class="form-group">
            <label>body</label>
-           <input id="body" type="text" name="certificate" value="${blogInfo.body}"></input>
+           <input id="body" type="text" name="body"></input>
         </div>
      <button class="btn btn-danger">Submit</button>
         </form>
@@ -28,12 +24,14 @@ const blogForm = async (ctx, next) => {
     const formData = {
       title: $("#title").val(),
       body: $("#body").val(),
+      // createdAt: $("input[name='address']").val(),
     };
-    updateBlogApi(formData, blogInfo._id).then((data) => {
-      console.log(data);
+    console.log(formData);
+    createBlogApi(formData).then((data) => {
+      console.log("data", data);
       page.redirect(`/blog`);
     });
   });
 };
 
-export default blogForm;
+export default blogNew;

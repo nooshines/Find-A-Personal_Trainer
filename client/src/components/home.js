@@ -1,5 +1,6 @@
 import page from "//unpkg.com/page/page.mjs";
 import createTrainerApi from "../api/auth/createTrainerApi.js";
+import findTrainerApi from "../api/trainer/findTrainerApi.js";
 
 const home = (ctx, next) => {
   $("#app").append(`
@@ -84,9 +85,9 @@ const home = (ctx, next) => {
   <div class="form-group">
 
   <select class="form-control" id="form-select">
-    <option>Sydney</option>
-    <option>Melbourne</option>
-    <option>Perth</option>
+    <option value="sydney">Sydney</option>
+    <option value="malbourne">Melbourne</option>
+    <option value="perth">Perth</option>
   </select>
 </div>
 </div>
@@ -97,11 +98,31 @@ const home = (ctx, next) => {
    
     </div>
     </form>
+
+
+
   </div>
+  <div id="mapid"></div>
 </div>
 </section>
 
+
     `);
+
+  const mymap = L.map("mapid").setView([-33.87271, 151.207609], 13);
+  L.tileLayer(
+    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoibm9vc2hpbmVzIiwiYSI6ImNrYzJtN2NsdjAzcWYycHAzMGJuZ2l5bjQifQ.dpz8OOGJk_7a3ArUBcR2Ew",
+    {
+      attribution:
+        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: "mapbox/streets-v11",
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken: "your.mapbox.access.token",
+    }
+  ).addTo(mymap);
+
   $("#form-signup").submit((e) => {
     e.preventDefault();
 
@@ -122,12 +143,23 @@ const home = (ctx, next) => {
 
   $("#search-form").submit((event) => {
     event.preventDefault();
-    const searchData = {
+    const searchParams = {
       location: $("#location").val(),
       distance: $("#distance").val(),
       city: $("#form-select").val(),
     };
-    console.log(searchData);
+    console.log("location,distance,city", searchParams);
+    findTrainerApi(searchParams).then((data) => {
+      console.log("data:", data);
+      data.forEach((trainer) => {
+        L.marker([
+          trainer.location.coordinates[1],
+          trainer.location.coordinates[0],
+        ]).addTo(mymap);
+      });
+    });
+
+    // page.redirect("/search/result");
   });
 };
 

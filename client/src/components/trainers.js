@@ -12,9 +12,10 @@ const addTrainersToDom = (trainers) => {
   trainers.forEach((trainer) => {
     console.log("trainer", trainer);
     $("#app").append(`
+    <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-6">
-          <div class="card">
+          <div class="card mb-5">
             <div class="card-body">
               <img src="" alt="" class="img-fluid rounded-circle w-50 mb-3">
               <h3 class="text-dark">${trainer.name}</h3>
@@ -42,10 +43,10 @@ const addTrainersToDom = (trainers) => {
             </div>
           </div>
         </div>
+        </div>
     `);
   });
 };
-
 const trainers = (ctx, next) => {
   getAllTrainersApi().then((data) => {
     console.log(data);

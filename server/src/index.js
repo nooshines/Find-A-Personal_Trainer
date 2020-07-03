@@ -1,5 +1,7 @@
 const express = require("express");
 const session = require("express-session");
+const multer = require("multer");
+const path = require("path");
 
 require("./mongo");
 
@@ -8,6 +10,9 @@ const port = 6000;
 
 //setup express app
 const app = express();
+
+//public folder
+app.use(express.static("./public"));
 
 //routes
 const trainerRouter = require("./routes/trainerRouter");

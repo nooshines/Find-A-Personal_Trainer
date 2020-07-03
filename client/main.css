@@ -3,7 +3,7 @@ body {
   color: #fff;
 }
 #container-center {
-  margin-top: 200px;
+  margin-top: 150px;
 }
 #blog-center {
   margin-top: 100px;
@@ -55,4 +55,12 @@ a:hover {
 
 #signedup-msg {
   display: none;
+}
+
+a nav-link :hover {
+  cursor: pointer !important;
+}
+
+#mapid {
+  height: 300px;
 }
