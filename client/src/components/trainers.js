@@ -12,7 +12,7 @@ const addTrainersToDom = (trainers) => {
   trainers.forEach((trainer) => {
     console.log("trainer", trainer);
     $("#app").append(`
-    <div class="container">
+    <div class="container trainer-center">
       <div class="row">
         <div class="col-lg-3 col-md-6">
           <div class="card mb-5">

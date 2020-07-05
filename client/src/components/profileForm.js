@@ -38,7 +38,7 @@ const profileForm = async (ctx, next) => {
                 </div>
                 <div class="form-group">
                   <label for="bio" class="text-dark">Bio</label>
-                  <textarea id="bio" class="form-control" value="${profile.bio}"></textarea>
+                  <textarea id="bio" class="form-control" value="${profile.bio}">${profile.bio}</textarea>
                 </div>
                 <button class="btn btn-outline-secondary">Save</button>
                 <a href="/profile/:id" class="btn btn-outline-secondary" id="search">Cancel</a>
@@ -52,6 +52,20 @@ const profileForm = async (ctx, next) => {
 
   $("#trainer-form").submit((e) => {
     e.preventDefault();
+
+    const imageData = new FormData();
+    imageData.append("avatar", $("#image")[0].files[0]);
+
+    const requestOptions = {
+      method: "POST",
+      body: imageData,
+      redirect: "follow",
+    };
+    fetch("/api/fileupload", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+
     const formData = {
       name: $("#name").val(),
       certificate: $("#certificate").val(),

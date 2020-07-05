@@ -11,7 +11,7 @@ const profileNew = async () => {
               <h4 class="text-dark">Create Profile</h4>
             </div>
             <div class="card-body">
-              <form id="trainer-form">
+              <form id="trainer-form" action="/upload" method:"POST">
                 <div class="form-group">
                   <label for="name" class="text-dark">Name</label>
                   <input id="name" type="text" class="form-control">

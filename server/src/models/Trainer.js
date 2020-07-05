@@ -29,7 +29,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: false,
   },
-
+  imageUrl: String,
   location: {
     type: pointSchema,
     index: "2dsphere",

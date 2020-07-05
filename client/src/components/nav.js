@@ -36,11 +36,8 @@ const nav = (ctx, next) => {
   if (localStorage.getItem("user")) {
     const user = JSON.parse(localStorage.getItem("user"));
     $("#navbar-list").append(` <li class="nav-item">
-    <a class="nav-link" id="profile">Profile</a>
+    <a href="/profile/${user.id}" class="nav-link" id="profile">Profile</a>
   </li>`);
-    $("#profile").on("click", () => {
-      page.redirect(`/profile/${user.id}`);
-    });
   }
 
   next(); // move onto next middleware

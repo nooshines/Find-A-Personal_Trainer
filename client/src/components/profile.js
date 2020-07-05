@@ -56,7 +56,7 @@ const profile = async (ctx, next) => {
                 </div>
                 <div class="form-group">
                   <label for="bio" class="text-dark">Bio</label>
-                  <textarea class="form-control" value="${profileInfo.bio}"></textarea>
+                  <textarea id="text-area" class="form-control" value="${profileInfo.bio}">${profileInfo.bio}</textarea>
                 </div>
             </div>
           </div>
@@ -64,7 +64,7 @@ const profile = async (ctx, next) => {
         <div class="col-md-3">
           <h3>Photo</h3>
           <img src="img/avatar.png" alt="" class="d-block img-fluid mb-3">
-          <button class="btn btn-primary btn-block">Edit Image</button>
+          <button class="btn btn-primary btn-block">Upload Image</button>
           <button class="btn btn-danger btn-block">Delete Image</button>
         </div>
       </div>
@@ -72,6 +72,7 @@ const profile = async (ctx, next) => {
   <div>
     `);
 
+    console.log("textarea", $("#text-area").text());
     $("#blog-page").on("click", () => {
       console.log("profileInfo:", profileInfo);
       page.redirect(`/blog`);

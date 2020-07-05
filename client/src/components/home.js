@@ -151,12 +151,20 @@ const home = (ctx, next) => {
     console.log("location,distance,city", searchParams);
     findTrainerApi(searchParams).then((data) => {
       console.log("data:", data);
-      data.forEach((trainer) => {
-        L.marker([
-          trainer.location.coordinates[1],
-          trainer.location.coordinates[0],
-        ]).addTo(mymap);
-      });
+      if (data && data.length) {
+        data.forEach((trainer) => {
+          $("#app").append(`
+          <div class="container mt-4">
+        <h4>${trainer.name}</h4>
+        <small class="mb-2">${trainer.address}</small>
+        </div>
+      `);
+          L.marker([
+            trainer.location.coordinates[1],
+            trainer.location.coordinates[0],
+          ]).addTo(mymap);
+        });
+      }
     });
 
     // page.redirect("/search/result");

@@ -57,10 +57,10 @@ a:hover {
   display: none;
 }
 
-a nav-link :hover {
-  cursor: pointer !important;
-}
-
 #mapid {
   height: 300px;
+}
+.trainer-center {
+  margin-top: 50px;
+  margin-left: 300px;
 }
