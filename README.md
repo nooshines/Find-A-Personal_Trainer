@@ -1,7 +1,12 @@
-# Find-A-Personal_Trainer
-Full-Stack
+# PROJECT #2
 
-Packages
+## Project Overview
+
+Full-Stack application, users can search for personal trainers based on GEO location .
+if user is a personal trainer can sign up as a trainer, create profile and make blog posts.
+
+## TECHNOLOGIES & RESOURCES USED
+
     - Express JS
     - Bcrypt 
     - mongoose JS
@@ -13,16 +18,17 @@ Packages
     - multer
     - page
 
-MODELS and ROUTS
-        Auth Schema
+
+## MODELS and ROUTS
+        #Auth Schema
             - username
             - password
             - email
-        Auth Routes
+        #Auth Routes
             - login
             - logout
             - new (sign up)     
-        Trainer Schema
+        #Trainer Schema
          * pointSchema
             -type
             -coordinates *
@@ -32,7 +38,7 @@ MODELS and ROUTS
             - bio
             - location
             - userId
-        Trainer Routes
+        #Trainer Routes
             - create profile
             - delete profile
             - find trainer
@@ -40,12 +46,12 @@ MODELS and ROUTS
             - get trainer by id
             - get trainer profile
             - update profile
-        Blog Schema
+        #Blog Schema
             - title
             - body
             - created at
             - userId
-        Blog Routes
+        #Blog Routes
             - create blog
             - delete blog
             - get all blogs
@@ -54,9 +60,9 @@ MODELS and ROUTS
             - update blog
          
 
-FRONTEND
+- **Front-end Framework **
 
-Tech
+#Tech
     * jquery
     * bootstrap
     * page
@@ -64,6 +70,7 @@ Tech
     * mapquest-mapbox
     * moment
 
-Queries With
+#Queries With
     * fetch
     * async await
+
