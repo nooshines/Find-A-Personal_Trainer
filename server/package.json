@@ -15,7 +15,7 @@
     "express-session": "^1.17.1",
     "filepond": "^4.18.0",
     "geojson": "^0.5.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.9.20",
     "multer": "^1.4.2",
     "node-geocoder": "^3.27.0",
